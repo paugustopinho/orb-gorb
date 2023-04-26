@@ -1276,9 +1276,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Currently Debt
+  m_text: 'Current Balance
 
-    $100,000'
+    -$100,000'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c570cf8ace61f8f4ba9fa46504d736e7, type: 2}
   m_sharedMaterial: {fileID: -4221969595769288604, guid: c570cf8ace61f8f4ba9fa46504d736e7, type: 2}
