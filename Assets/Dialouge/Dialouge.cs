@@ -4,18 +4,22 @@ using UnityEngine;
 using UnityEditor.UI;
 using TMPro;
 using System;
+using System.Reflection;
 
 public class Dialouge : MonoBehaviour
 {
     [SerializeField] List<string> lines, response, answer;
+    [SerializeField] List<int> currencyObtained;
     [SerializeField] GameObject button1, button2;
-    [SerializeField] TextMeshProUGUI output, answer1, answer2;
+    [SerializeField] TextMeshProUGUI output, answer1, answer2, headOut, currentDebt;
+    [SerializeField] String headingTo;
     float textSpeed = 0.1f;
     bool listenforAnswer;
     int answerTo1, answerTo2;
 
     void Start()
     {
+        currentDebt.text = "Current Balance:\n" + GameObject.FindGameObjectWithTag("DebtController").GetComponent<DebtController>().currentDebt;
         firstLine();
     }
 
@@ -84,5 +88,20 @@ public class Dialouge : MonoBehaviour
         yield return new WaitForSeconds(textSpeed * 2f);
         if (doesContinue)
             choice(2, 3);
+        else {
+            GameObject.FindGameObjectWithTag("DebtController").GetComponent<DebtController>().salary = currencyObtained[index];
+            StartCoroutine(headTo());
+        }
+    }
+
+    IEnumerator headTo()
+    {
+        headOut.text = "";
+        foreach (char c in headingTo.ToCharArray())
+        {
+            headOut.text += c;
+            yield return new WaitForSeconds(textSpeed);
+        }
+        yield return new WaitForSeconds(textSpeed * 2f);
     }
 }
