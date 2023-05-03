@@ -11,42 +11,54 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     float walkSpeed, sprintSpeed;
     float horizontal, vertical;
-    [SerializeField] float jumpForce = 1f;
-    bool isGrounded;
-    CapsuleCollider col;
+    [SerializeField] float jumpForce;
+    [SerializeField] bool isGrounded;
     [SerializeField] LayerMask ground;
 
     void Start()
     {
-        walkSpeed = speed;
-        sprintSpeed = speed * 1.5f;
+        sprintSpeed = speed;
+        walkSpeed = speed / 1.5f;
         rb = GetComponent<Rigidbody>();
-        col = GetComponent<CapsuleCollider>();
     }
 
-    void Update()
+    private void Update()
+    {
+        Inputs();
+        Jump();
+    }
+
+    void FixedUpdate()
     {
         Move();
     }
 
-    void Move()
+    void Inputs()
     {
-        float radius = col.radius * 0.9f;
-        Vector3 pos = transform.position + Vector3.up * (radius * 0.9f);
-        isGrounded = Physics.CheckSphere(pos, radius, ground);
-
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
+    }
+
+    void Move()
+    {
 
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        transform.rotation = Quaternion.Euler(0f, cam.eulerAngles.y, 0f);
 
-        //walking
         if (direction.magnitude >= 0.1f)
         {
-            float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            transform.rotation = Quaternion.Euler(0f, cam.eulerAngles.y, 0f);
-            Vector3 moveDir = Quaternion.Euler(0f, angle, 0f) * direction;
+            Vector3 moveDir = Quaternion.Euler(0f, cam.eulerAngles.y, 0f) * direction;
             rb.velocity = new Vector3(moveDir.x * speed, rb.velocity.y, moveDir.z * speed);
+        }
+    }
+
+    void Jump()
+    {
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.25f, ground);
+
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 }
