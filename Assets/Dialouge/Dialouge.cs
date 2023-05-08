@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.UI;
 using TMPro;
 using System;
-using System.Reflection;
+using UnityEngine.SceneManagement;
 
 public class Dialouge : MonoBehaviour
 {
@@ -103,5 +102,10 @@ public class Dialouge : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
         yield return new WaitForSeconds(textSpeed * 2f);
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if (SceneManager.sceneCountInBuildSettings > nextSceneIndex)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
     }
 }

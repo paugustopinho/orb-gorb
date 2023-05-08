@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/1 DialougeScene1.unity
+    guid: 1afeea098fbc74249b3f66d37f15412b
+  - enabled: 1
+    path: Assets/Scenes/2 Bees Planet.unity
+    guid: e18d6b76323e7184dab4571c33e0ee1e
+  - enabled: 1
+    path: Assets/Scenes/3 DialougeScene2.unity
+    guid: 10a72d8cfc737d443a17546390a3bbf4
+  - enabled: 1
+    path: Assets/Scenes/4 Poolus Planet.unity
+    guid: d0364eab05f06724ab0a0cb8d0d5b7fb
+  - enabled: 1
+    path: Assets/Scenes/5 DialougeScene3.unity
+    guid: aa5517442df66374e9e54cf2a90b75e7
   m_configObjects: {}

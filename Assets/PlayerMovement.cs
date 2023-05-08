@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     [SerializeField] Transform cam;
     public float speed;
-    float walkSpeed, sprintSpeed;
+    public Vector3 startpos;
     float horizontal, vertical;
     [SerializeField] float coyoteTimeCounter, coyoteTime;
     [SerializeField] float jumpForce;
@@ -18,8 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        sprintSpeed = speed;
-        walkSpeed = speed / 1.5f;
+        startpos = transform.position;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -45,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
         transform.rotation = Quaternion.Euler(0f, cam.eulerAngles.y, 0f);
-        //if (!isGrounded) { direction = new Vector3(0f, 0f, vertical).normalized; }
 
         if (direction.magnitude >= 0.1f)
         {
@@ -75,10 +73,10 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-        /*else if ( Input.GetButtonDown("Jump") && secondJump)
+        else if ( Input.GetButtonDown("Jump") && secondJump)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             secondJump = false;
-        }*/
+        }
     }
 }
