@@ -8,9 +8,11 @@ public class LavaPlatform : MonoBehaviour
     Rigidbody rb;
     Vector3 startpos;
     public bool swaying;
+    [SerializeField] float speed;
 
     private void Start()
     {
+        speed = Random.Range(0.5f, 1.25f);
         startpos = transform.position;
         rb = GetComponent<Rigidbody>();
     }
@@ -37,7 +39,7 @@ public class LavaPlatform : MonoBehaviour
         if (transform.position.y >= startpos.y) { rb.velocity = Vector3.zero; swaying = true; }
         if (swaying)
         {
-            float y = Mathf.PingPong(Time.time * .5f, .5f);
+            float y = Mathf.PingPong(Time.time * speed, .5f);
             transform.position = new Vector3(transform.position.x, startpos.y - y, transform.position.z);
         }
     }
