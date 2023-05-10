@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/0 Start.unity
+    guid: 3ada2727088f02545a340a68c518015a
+  - enabled: 1
     path: Assets/Scenes/1 DialougeScene1.unity
     guid: 1afeea098fbc74249b3f66d37f15412b
   - enabled: 1
@@ -32,4 +35,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/9 DialougeScene5.unity
     guid: d7fa5b01ac267a848adc8adf669d6de8
+  - enabled: 1
+    path: Assets/Scenes/10 Lorax Planet.unity
+    guid: af96342d7bcf8444092d5d70be554a79
+  - enabled: 1
+    path: Assets/Scenes/11 End.unity
+    guid: 6a13b9b0dc2e4c24483af00cd11a2476
   m_configObjects: {}
