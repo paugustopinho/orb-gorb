@@ -21,7 +21,7 @@ public class LavaPlatform : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            rb.velocity = new Vector3(0f, -.05f, 0f);
+            rb.velocity = new Vector3(0f, -.005f, 0f);
             swaying = false;
         }
     }

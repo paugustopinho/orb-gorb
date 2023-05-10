@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using static Cinemachine.CinemachineOrbitalTransposer;
+using UnityEngine.SceneManagement;
 
 public class EndGame : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI output, currentDebt;
-    [SerializeField] List<string> lines;
+    [SerializeField] TextMeshProUGUI output, currentDebt, headOut;
+    [SerializeField] List<string> lines, headingTo;
     [SerializeField] float textSpeed;
 
     void Start()
@@ -23,15 +25,25 @@ public class EndGame : MonoBehaviour
 
     IEnumerator TypeLines(bool hasWon)
     {
-        string str = "";
+        int index = 1;
         if (hasWon)
-            str = lines[0];
-        else
-            str = lines[1];
+            index = 0;
 
-        foreach (char c in str.ToCharArray())
+        foreach (char c in lines[index].ToCharArray())
         {
             output.text += c;
+            yield return new WaitForSeconds(textSpeed);
+        }
+        yield return new WaitForSeconds(textSpeed * 2f);
+        StartCoroutine(headTo(index));
+    }
+
+    IEnumerator headTo(int index)
+    {
+        headOut.text = "";
+        foreach (char c in headingTo[index].ToCharArray())
+        {
+            headOut.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
         yield return new WaitForSeconds(textSpeed * 2f);
